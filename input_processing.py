@@ -10,6 +10,7 @@
 
 
 # No global variables are permitted
+#This class creates the SensorError for when menu input is incorrect
 class SensorError(ValueError):
     pass
     
@@ -30,7 +31,11 @@ class Sensor:
         self.quit = False
     
 
-    # Replace these comments with your function commenting
+    # update_status function recieves the following parameters:
+    # self - the object
+    # update_in - menu item selection, input will only ever be "1", "2", or, "3"
+    # The function takes the menu item selection, and changes the value of either vehicle, pediestrian or trafficlight
+    # depending on the value of update_in. If the entered new state is invalid then the user is prompted to reenter state
     def update_status(self, update_in): # You may decide how to implement the arguments for this function
         
         value_correct = False
@@ -55,7 +60,10 @@ class Sensor:
                         self.vehicle = value
                     else:
                         print("\nInvalid status, please try again\n")
-    
+    # status function recieves the following parameters:
+    # self - the object
+    # status returns a string of either "\nSTOP", "\nProceed", or, "\nCaution" depending on what pedestrian, trafficlight, or vehicle are
+    #this function is used for the print_message function
     def status(self):
         if self.pedestrian == "yes" or self.vehicle == "yes" or self.trafficlight == "red":
             return "\nSTOP"
@@ -69,7 +77,11 @@ class Sensor:
 
 
 # The sensor object should be passed to this function to print the action message and current status
-# Replace these comments with your function commenting
+# print_message function recieves the following parameters:
+# sensor - a sensor object
+# print_message takes a sensor object and prints out the car vision systems input and output status.
+# the function features error checking for invalid menu item selection and also continues prompting the user
+# for input unless 0 is sent to the terminal on the menu select screen.
 def print_message(sensor):
     print("Are changes detected in the vision input?\n")
     error = True
